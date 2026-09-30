@@ -11,7 +11,9 @@ e sem ambiguidades.
 
 ## Briefing
 
-> Cole aqui o briefing de negócio.
+Sua empresa solicitou uma aplicação de previsão do tempo. Usuários devem poder:
+buscar cidades, ver o clima atual, ver a previsão de 5 dias, alternar entre
+Celsius e Fahrenheit e usar em dispositivos móveis.
 
 ## Tarefa
 

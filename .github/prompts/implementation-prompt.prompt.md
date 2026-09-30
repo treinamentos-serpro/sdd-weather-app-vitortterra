@@ -10,7 +10,7 @@ Você é o **Code Agent**. Implemente a tarefa indicada de
 
 ## Tarefa a implementar
 
-> Cole aqui o ID e o título da tarefa (ex.: `T-05 — Componente SearchBar`).
+T-07 — Implementar testes unitários de busca e temperaturas
 
 ## Passos
 

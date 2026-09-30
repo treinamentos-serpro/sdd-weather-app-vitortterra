@@ -1,30 +1,30 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-  toFahrenheit,
-  convertTemperature,
   formatTemperature,
-  unitLabel,
+  TEMPERATURE_ROUNDING_RULE,
+  toCelsius,
+  toFahrenheit,
 } from '../../src/lib/temperature';
 
-describe('temperature', () => {
-  it('converte Celsius para Fahrenheit corretamente', () => {
+describe('temperature conversion and formatting', () => {
+  it('converts Celsius to Fahrenheit without rounding the internal value', () => {
     expect(toFahrenheit(0)).toBe(32);
     expect(toFahrenheit(100)).toBe(212);
     expect(toFahrenheit(-40)).toBe(-40);
+    expect(toFahrenheit(12.5)).toBeCloseTo(54.5, 10);
   });
 
-  it('convertTemperature respeita a unidade', () => {
-    expect(convertTemperature(20, 'celsius')).toBe(20);
-    expect(convertTemperature(0, 'fahrenheit')).toBe(32);
+  it('converts in both directions with precise values', () => {
+    expect(toCelsius(32)).toBe(0);
+    expect(toCelsius(212)).toBe(100);
+    expect(toCelsius(68)).toBeCloseTo(20, 10);
   });
 
-  it('formata com símbolo de grau e arredondamento', () => {
-    expect(formatTemperature(20.4, 'celsius')).toBe('20°');
-    expect(formatTemperature(0, 'fahrenheit')).toBe('32°');
-  });
-
-  it('retorna o rótulo da unidade', () => {
-    expect(unitLabel('celsius')).toBe('°C');
-    expect(unitLabel('fahrenheit')).toBe('°F');
+  it('formats for the active unit and records the rounding rule', () => {
+    expect(TEMPERATURE_ROUNDING_RULE).toBe('nearest whole number');
+    expect(formatTemperature(0, 'celsius')).toBe('0°C');
+    expect(formatTemperature(0.5, 'celsius')).toBe('1°C');
+    expect(formatTemperature(32, 'fahrenheit')).toBe('32°F');
+    expect(formatTemperature(68.6, 'fahrenheit')).toBe('69°F');
   });
 });
